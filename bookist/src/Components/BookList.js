@@ -1,4 +1,10 @@
-const data = [
+import React from 'react'
+
+
+
+
+// const mappedBooks = books.map(book=><li>P{book}</li>)
+const data =  [
     {
         id: 1,
         title: `The Pragmatic Programmer`, 
@@ -71,6 +77,41 @@ const data = [
         author: `Paul McFedries`, 
         img: `https://images-na.ssl-images-amazon.com/images/I/41-6F+RDbIL._SX258_BO1,204,203,200_.jpg`
     }
-]
 
-export default data
+
+    ]
+
+class BookList extends React.Component {
+    _renderObject(){
+		return Object.entries(data).map(([key, value], i) => {
+			return (
+				<div key={i}>
+                    {value.img};
+					{value.title};
+					{value.author}
+				</div>
+			)
+		})
+	}
+
+	render(){
+		return(
+			<div>
+				{this._renderObject()}
+                
+			</div>
+		)
+	}
+}
+
+
+
+
+        // <div>
+        //     <h3>List</h3>
+        //     <div className="bookImages">{data}</div>
+        // </div>
+    
+
+
+export default BookList;

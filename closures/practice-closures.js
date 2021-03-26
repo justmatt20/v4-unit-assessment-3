@@ -9,12 +9,21 @@
   */
   
   //CODE HERE
+  function myFunc () {
+    var myStr = 'super secret string'
+  return function getSecretString() {
+      console.log(myStr)
+    }
+  }
 
+  
   
   //Now create a variable called secretString. Its value should be the invocation of myFunc.
 
   //CODE HERE
-  
+  const secretString = myFunc()
+
+  secretString()
   
   ////////////PROBLEM 2////////////
 
@@ -30,14 +39,29 @@
   
   //CODE HERE
 
-  
+  function lightSwitch () {
+    const isTheLightOn = false;
+    return function flipTheSwitch() {
+      if (isTheLightOn === false) {
+        console.log('The light is off')
+      }
+      else{
+        console.log('The light is on')
+      }
+    }
+  }
+
+  // lightSwitch(flipTheSwitch)
   //Create a variable called kitchenSwitch whose value is the invocation of lightSwitch.
   
   //CODE HERE
 
-  
+  const kitchenSwitch = lightSwitch;
+
+
   //Invoke kitchenSwitch.
 
+  kitchenSwitch()
   //CODE HERE
   
   
@@ -45,12 +69,12 @@
 
   //CODE HERE
   
-  
+  const bathroomSwitch = lightSwitch()
   //Invoke bathroomSwitch twice.
   
   //CODE HERE
 
-  
+  bathroomSwitch(true)
   
   ////////////PROBLEM 3////////////
 
@@ -65,6 +89,21 @@
 
   //CODE HERE
 
+  let plantTracker = function () {
+    let plant = 'fern';
+    let height = 12;
+      return {
+        readInfo: function() {
+          console.log(`This is a ${plant} that is ${height} inches tall.`)
+        },
+        waterPlant: function() {
+          console.log(height +1)
+        },
+        prunePlant: function () {
+          console.log(height -1)
+        }
+      }
+  }
 
   ////////////PROBLEM 4////////////
 
@@ -80,12 +119,28 @@
 
   //CODE HERE
 
-
+  let inventory = function () {
+    let products = [];
+    return {
+      readProducts: function() {
+        console.log(products)
+      },
+      addToProducts: function(item) {
+        console.log(products.push(item))
+      },
+      deleteFromProducts: function() {
+        let index = products.length
+        console.log(index.pop())
+      }
+    }
+  }
   /*
     Create a variable called 'shoes' whose value is the invocation of inventory.
   */
 
   //CODE HERE
+const shoes = inventory()
+
 
 
   /*
@@ -94,3 +149,6 @@
 
   //CODE HERE
 
+inventory.addToProducts()
+
+inventory.deleteFromProducts()
