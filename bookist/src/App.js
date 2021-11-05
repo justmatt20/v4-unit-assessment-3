@@ -1,56 +1,43 @@
-import React, { Component } from 'react';
-import Header from './Components/Header';
-import BookList from './Components/BookList';
-import Shelf from './Components/Shelf';
-import data from './Data';
-import './App.css';
-import SearchBar from './Components/SearchBar';
+import React, { Component } from "react";
+import Header from "./Components/Header";
+import BookList from "./Components/BookList";
 
+import data from "./Data";
+import "bootstrap/dist/css/bootstrap.min.css";
+import SearchBar from "./Components/SearchBar";
+import "./App.css";
 
-
-class App extends Component{
-  constructor(props){
+class App extends Component {
+  constructor(props) {
     super(props);
-    this.state = {  
+    this.state = {
       // books: [{data}],
-      shelf: '',
-      search: ''
+      shelf: "",
+      search: "",
     };
   }
 
-  
   // addToShelf = (props) => {
   //   this.setState({shelf: this.state.data.title})
   // }
-
-  clearShelf= () => {
-    this.setState({shelf: ''})
-  }
 
   // filterBooks = (input) => {
 
   // }
 
   reset = () => {
-    this.setState({books: ''})
+    this.setState({ books: "" });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <Header className="Header" />
+
+        <BookList className="BookList" />
+      </div>
+    );
   }
-
-render() {
-  return (
-    
-    <div className="App">
-      <Header  className="Header"/>
-      <SearchBar />
-      <BookList className="BookList"/>
-      <Shelf />
-      
-    </div>
-  );
-
 }
-
-}
-
-
 
 export default App;

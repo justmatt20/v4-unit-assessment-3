@@ -1,14 +1,23 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import {
+  Navbar,
+  Container,
+  Button,
+  OverlayTrigger,
+  Popover,
+} from "react-bootstrap";
 
-
-
-class Header extends Component{
-    render() {
-    return(
-        <div className="Header">
-    <h1>Bookist</h1>
-    </div>
-)
-    }
+class Header extends Component {
+  render(props) {
+    return (
+      <div>
+        <Container>
+          <Navbar expand="xl" variant="light" bg="light">
+            <Container className="header">BookList</Container>
+          </Navbar>
+        </Container>
+      </div>
+    );
+  }
 }
 export default Header;

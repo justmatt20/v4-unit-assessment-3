@@ -1,0 +1,28 @@
+.booklist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.books {
+  margin: 2rem;
+  margin-bottom: 20px;
+}
+.shelf {
+  float: right;
+  margin-right: 100px;
+}
+
+.popover {
+  width: 100%;
+}
+
+.popbtn {
+  width: 200px;
+  float: right;
+  margin-right: 80px;
+}
+
+.shelfctn {
+  margin-top: 20px;
+}

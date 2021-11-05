@@ -1,117 +1,92 @@
-import React from 'react'
-
-
-
-
-// const mappedBooks = books.map(book=><li>P{book}</li>)
-const data =  [
-    {
-        id: 1,
-        title: `The Pragmatic Programmer`, 
-        author: `David Thomas, Andrew Hunt`,
-        img: `https://images-na.ssl-images-amazon.com/images/I/51cUVaBWZzL._SX380_BO1,204,203,200_.jpg`
-    },
-    {
-        id: 2,
-        title: `HTML and CSS: Design and Build Websites`, 
-        author: `Jon Duckett`,
-        img: `https://images-na.ssl-images-amazon.com/images/I/31aX81I6vnL._SX351_BO1,204,203,200_.jpg`
-    },
-    {
-        id: 3,
-        title: `Coding All-in-one For Dummies`, 
-        author: `Nikhil Abraham`,
-        img: `https://images-na.ssl-images-amazon.com/images/I/51RXaV0MGzL._SX397_BO1,204,203,200_.jpg`
-    },
-    {
-        id: 4,
-        title: `Learning React`, 
-        author: `Alex Banks, Eve Porcello`,
-        img: `https://images-na.ssl-images-amazon.com/images/I/51FHuacxYjL._SX379_BO1,204,203,200_.jpg`
-    },
-    {
-        id: 5,
-        title: `Learning Web Design`, 
-        author: `Jennifer Robbins`,
-        img: `https://images-na.ssl-images-amazon.com/images/I/51iVcZUGuoL._SX408_BO1,204,203,200_.jpg`
-    },
-    {
-        id: 6,
-        title: `JavaScript and JQuery: Interactive Front-End Web Development`, 
-        author: `Jon Duckett`,
-        img: `https://images-na.ssl-images-amazon.com/images/I/41y31M-zcgL._SX400_BO1,204,203,200_.jpg`
-    },
-    {
-        id: 7,
-        title: `Head First JavaScript Programming`, 
-        author: `Eric Freeman, Elisabeth Robson`,
-        img: `https://images-na.ssl-images-amazon.com/images/I/51qQTSKL2nL._SX430_BO1,204,203,200_.jpg`
-    },
-    {
-        id: 8,
-        title: `Learning Redux`, 
-        author: `Daniel Bugl`,
-        img: `https://images-na.ssl-images-amazon.com/images/I/41gxBZ8GNpL._SX403_BO1,204,203,200_.jpg`
-    },
-    {
-        id: 9,
-        title: `Node.js 8 the Right Way`, 
-        author: `Jim Wilson`,
-        img: `https://images-na.ssl-images-amazon.com/images/I/51t44mzlCaL._SX415_BO1,204,203,200_.jpg`
-    },
-    {
-        id: 10,
-        title: `PostgreSQL: Up and Running`, 
-        author: `Regina Obe`,
-        img: `https://images-na.ssl-images-amazon.com/images/I/51FSjiYDfpL._SX379_BO1,204,203,200_.jpg`
-    },
-    {
-        id: 11,
-        title: `Fundamentals of Web Development`,
-        author: `Randy Connolly, Ricardo Hoar`, 
-        img: `https://images-na.ssl-images-amazon.com/images/I/51xEzGTH6lL._SX402_BO1,204,203,200_.jpg`
-    },
-    {
-        id: 12,
-        title: `Web Design Playground`,
-        author: `Paul McFedries`, 
-        img: `https://images-na.ssl-images-amazon.com/images/I/41-6F+RDbIL._SX258_BO1,204,203,200_.jpg`
-    }
-
-
-    ]
+import React from "react";
+import SearchBar from "./SearchBar";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Popover,
+  OverlayTrigger,
+  Button,
+} from "react-bootstrap";
+import Data from "../Data";
 
 class BookList extends React.Component {
-    _renderObject(){
-		return Object.entries(data).map(([key, value], i) => {
-			return (
-				<div key={i}>
-                    {value.img};
-					{value.title};
-					{value.author}
-				</div>
-			)
-		})
-	}
+  constructor(props) {
+    super();
+    this.state = {
+      shelf: [],
+    };
+  }
 
-	render(){
-		return(
-			<div>
-				{this._renderObject()}
-                
-			</div>
-		)
-	}
+  addBook = (value) => {
+    this.setState(() => ({
+      shelf: [...this.state.shelf, value.title],
+    }));
+
+    console.log(this.state.shelf);
+  };
+
+  _renderObject() {
+    return Data.map((value, id) => {
+      return (
+        <div>
+          <Card
+            style={{ width: "16rem" }}
+            key={id}
+            onClick={() => this.addBook(value)}
+            className="books"
+          >
+            <Card.Img variant="top" src={value.img} />
+            <Card.Body>
+              <Card.Text>
+                {value.title}
+                <span> By </span>
+
+                {value.author}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+      );
+    });
+  }
+
+  renderShelf = () => {
+    return this.state.shelf.map((value, id) => {
+      return (
+        <div key={id}>
+          <p>{value} </p>
+        </div>
+      );
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <SearchBar />
+        <div className="shelfctn">
+          <OverlayTrigger
+            trigger="click"
+            key="bottom"
+            placement="bottom"
+            overlay={
+              <Popover id={`bottom`}>
+                <Popover.Header as="h3">{`Shelf`}</Popover.Header>
+                <Popover.Body>{this.renderShelf()}</Popover.Body>
+              </Popover>
+            }
+          >
+            <Button className="popbtn" variant="info">
+              Shelf
+            </Button>
+          </OverlayTrigger>
+        </div>
+        <div className="booklist">{this._renderObject()}</div>
+      </div>
+    );
+  }
 }
-
-
-
-
-        // <div>
-        //     <h3>List</h3>
-        //     <div className="bookImages">{data}</div>
-        // </div>
-    
-
 
 export default BookList;
