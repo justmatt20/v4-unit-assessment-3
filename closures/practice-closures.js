@@ -1,33 +1,31 @@
-  ////////////PROBLEM 1////////////
-  
-  /*
+////////////PROBLEM 1////////////
+
+/*
     Write a function called myFunc. 
     Inside the function, we'll create a variable and another function. 
     Call the variable myStr and set it to the string 'super secret string'. 
     Call the function getSecretString and have it return the myStr variable. 
     myFunc should return getSecretString
   */
-  
-  //CODE HERE
-  function myFunc () {
-    var myStr = 'super secret string'
+
+//CODE HERE
+function myFunc() {
+  var myStr = "super secret string";
   return function getSecretString() {
-      console.log(myStr)
-    }
-  }
+    console.log(myStr);
+  };
+}
 
-  
-  
-  //Now create a variable called secretString. Its value should be the invocation of myFunc.
+//Now create a variable called secretString. Its value should be the invocation of myFunc.
 
-  //CODE HERE
-  const secretString = myFunc()
+//CODE HERE
+const secretString = myFunc();
 
-  secretString()
-  
-  ////////////PROBLEM 2////////////
+secretString();
 
-  /*
+////////////PROBLEM 2////////////
+
+/*
     Write a function called lightSwitch. It will return an inner function.
     Create a variable inside lightSwitch called isTheLightOn and set its initial value to the boolean false. 
     Write a function called flipTheSwitch inside lightSwitch. 
@@ -36,49 +34,46 @@
     And if the light is off (false), the string should be 'The light is off'. 
     The lightSwitch function should return flipTheSwitch.
   */
-  
-  //CODE HERE
 
-  function lightSwitch () {
-    const isTheLightOn = false;
-    return function flipTheSwitch() {
-      if (isTheLightOn === false) {
-        console.log('The light is off')
-      }
-      else{
-        console.log('The light is on')
-      }
+//CODE HERE
+
+function lightSwitch() {
+  const isTheLightOn = false;
+  return function flipTheSwitch() {
+    if (isTheLightOn === false) {
+      console.log("The light is off");
+    } else {
+      console.log("The light is on");
     }
-  }
+  };
+}
 
-  // lightSwitch(flipTheSwitch)
-  //Create a variable called kitchenSwitch whose value is the invocation of lightSwitch.
-  
-  //CODE HERE
+// lightSwitch(flipTheSwitch)
+//Create a variable called kitchenSwitch whose value is the invocation of lightSwitch.
 
-  const kitchenSwitch = lightSwitch;
+//CODE HERE
 
+const kitchenSwitch = lightSwitch;
 
-  //Invoke kitchenSwitch.
+//Invoke kitchenSwitch.
 
-  kitchenSwitch()
-  //CODE HERE
-  
-  
-  //Create a variable called bathroomSwitch whose value is the invocation of lightSwitch. 
+kitchenSwitch();
+//CODE HERE
 
-  //CODE HERE
-  
-  const bathroomSwitch = lightSwitch()
-  //Invoke bathroomSwitch twice.
-  
-  //CODE HERE
+//Create a variable called bathroomSwitch whose value is the invocation of lightSwitch.
 
-  bathroomSwitch(true)
-  
-  ////////////PROBLEM 3////////////
+//CODE HERE
 
-  /*
+const bathroomSwitch = lightSwitch();
+//Invoke bathroomSwitch twice.
+
+//CODE HERE
+
+bathroomSwitch(true);
+
+////////////PROBLEM 3////////////
+
+/*
     Use the module pattern to create a plant height tracker, name your function 'plantTracker'
     Set up two variables inside plantTracker, 'plant' which should be set to 'fern' and 'height' which should be set to 12
     Return 3 functions using the module pattern
@@ -87,27 +82,34 @@
       - 'prunePlant' should subtract 1 from the height and return the new height
   */
 
-  //CODE HERE
+//CODE HERE
 
-  let plantTracker = function () {
-    let plant = 'fern';
-    let height = 12;
-      return {
-        readInfo: function() {
-          console.log(`This is a ${plant} that is ${height} inches tall.`)
-        },
-        waterPlant: function() {
-          console.log(height +1)
-        },
-        prunePlant: function () {
-          console.log(height -1)
-        }
-      }
+function plantTracker() {
+  let plant = "fern";
+  let height = 12;
+
+  function readInfo() {
+    return `This is a ${plant} plant that is ${height} inches tall.`;
   }
 
-  ////////////PROBLEM 4////////////
+  function waterPlant() {
+    return (height += 1);
+  }
 
-  /*
+  function prunePlant() {
+    return (height -= 1);
+  }
+
+  return {
+    readInfo: readInfo,
+    waterPlant: waterPlant,
+    prunePlant: prunePlant,
+  };
+}
+
+////////////PROBLEM 4////////////
+
+/*
     Use the module pattern to create an inventory, name the function 'inventory'
     Set up a variable inside inventory called 'products' initialized as an empty array.  
     Return 3 functions using the module pattern
@@ -117,38 +119,29 @@
         - hint: try to find the index of the string first
   */
 
-  //CODE HERE
+//CODE HERE
 
-  let inventory = function () {
-    let products = [];
-    return {
-      readProducts: function() {
-        console.log(products)
-      },
-      addToProducts: function(item) {
-        console.log(products.push(item))
-      },
-      deleteFromProducts: function() {
-        let index = products.length
-        console.log(index.pop())
-      }
-    }
-  }
-  /*
+function inventory() {
+  let products = [];
+
+  return {
+    readProducts: () => products,
+    addToProducts: (product) => products.push(product),
+    deleteFromProducts: (product) =>
+      products.splice(products.indexOf(product), 1),
+  };
+}
+/*
     Create a variable called 'shoes' whose value is the invocation of inventory.
   */
 
-  //CODE HERE
-const shoes = inventory()
+//CODE HERE
+const shoes = inventory();
 
-
-
-  /*
+/*
     Add an item to your shoes array using the addToProducts function
   */
 
-  //CODE HERE
+//CODE HERE
 
-inventory.addToProducts()
-
-inventory.deleteFromProducts()
+shoes.addToProducts("Nike");
